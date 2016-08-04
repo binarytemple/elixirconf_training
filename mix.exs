@@ -29,12 +29,12 @@ defmodule Docs.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 1.0.3"},
+    [{:phoenix, "~> 1.2.0"},
      {:phoenix_ecto, "~> 1.1"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.1"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:sweet_xml, "~> 0.2.1"},
-     {:cowboy, "~> 1.0"}]
+     {:phoenix_html, "~> 2.6.2"},
+     {:phoenix_live_reload, "~> 1.0.5", only: :dev},
+     {:sweet_xml, "~> 0.6.1"},
+     {:cowboy, "~> 1.0.4"}]
   end
 end

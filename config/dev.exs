@@ -30,6 +30,7 @@ config :logger, :console, format: "[$level] $message\n"
 config :docs, Docs.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: "docs_dev",
+  user: "postgres",
   size: 10 # The amount of database connections in the pool
 
 
