@@ -33,13 +33,14 @@ socket.onOpen( () => console.log('connected asdsd') )
 
 let App = {
   init() {
+    let editor = new Quill("#editor")
+
     let docId  = $('#doc-form').data('id')
     if(!docId) { return }
 
     let docChan   = socket.channel("documents:" + docId)
     docChan.params["last_message_id"] = 0
 
-    let editor          = new Quill("#editor")
     let editorContainer = $('#editor')
     let docForm         = $("#doc-form")
 
@@ -122,6 +123,4 @@ let App = {
     msgContainer.append(`<br/> ${msg.body}`)
     msgContainer.scrollTop(msgContainer.prop("scrollHeight"))
   }
-}
-
-App.init()
+}.init()
