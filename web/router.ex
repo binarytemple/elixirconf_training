@@ -16,10 +16,14 @@ defmodule Docs.Router do
   scope "/", Docs do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
-    resources "/documents", DocumentController do
+    resources "/", DocumentController do
       resources "/messages", MessageController
     end
+
+    #get "/", PageController, :index
+    #resources "/documents", DocumentController do
+    #  resources "/messages", MessageController
+    #end
   end
 
   # Other scopes may use custom stacks.
