@@ -18,7 +18,11 @@ defmodule Docs.Web do
 
   def model do
     quote do
-      use Ecto.Model
+      use Ecto.Schema
+
+      import Ecto
+      import Ecto.Changeset
+      import Ecto.Query
     end
   end
 
@@ -27,10 +31,11 @@ defmodule Docs.Web do
       use Phoenix.Controller
 
       alias Docs.Repo
-      import Ecto.Model
-      import Ecto.Query, only: [from: 1, from: 2]
+      import Ecto
+      import Ecto.Query
 
       import Docs.Router.Helpers
+      import Docs.Gettext
     end
   end
 
@@ -45,6 +50,8 @@ defmodule Docs.Web do
       use Phoenix.HTML
 
       import Docs.Router.Helpers
+      import Docs.ErrorHelpers
+      import Docs.Gettext
     end
   end
 
@@ -59,13 +66,9 @@ defmodule Docs.Web do
       use Phoenix.Channel
 
       alias Docs.Repo
-      alias Docs.Document
-      alias Docs.Message
-      import Ecto.Model
-      import Ecto.Query, only: [from: 2]
-
-      # don't just put functions here.
-      # if you want to share stuff, make a module for it
+      import Ecto
+      import Ecto.Query
+      import Docs.Gettext
     end
   end
 
