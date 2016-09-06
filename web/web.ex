@@ -48,10 +48,12 @@ defmodule Docs.Web do
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
+      use PhoenixHtmlSanitizer, :basic_html 
 
       import Docs.Router.Helpers
       import Docs.ErrorHelpers
       import Docs.Gettext
+
     end
   end
 

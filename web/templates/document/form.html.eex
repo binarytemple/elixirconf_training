@@ -24,8 +24,11 @@
 
   <div class="form-group">
     <div id="editor" class="form-control">
-      <!-- don't use raw, sanitize HTML -->
-      <%= if @changeset.valid? do raw (  @changeset.data.body ) else raw("<div></div>")  end   %>
+      <%= if @changeset.valid? do 
+            sanitize(@changeset.data.body, :basic_html)  
+          else 
+            raw("<div></div>")  
+          end %>
     </div>
   </div>
 

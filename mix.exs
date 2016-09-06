@@ -39,7 +39,8 @@ defmodule Docs.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:mochijson2minimal, github: "binarytemple/mochijson2-minimal", app: false},
-     {:sweet_xml, "~> 0.6.1"}
+     {:sweet_xml, "~> 0.6.1"}, 
+     {:html_sanitize , git: "git@github.com:binarytemple/phoenix_html_sanitizer.git", app: false, tag: "v1.0.2"}
      ]
   end
 

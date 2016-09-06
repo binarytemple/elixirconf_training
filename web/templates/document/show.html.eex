@@ -4,12 +4,12 @@
 
   <li>
     <strong>Body:</strong>
-    <%= @document.body %>
+    <%= sanitize(@document.body, :basic_html)  %>
   </li>
 
   <li>
     <strong>Title:</strong>
-    <%= @document.title %>
+    <%= sanitize(@document.title, :strip_tags) %></td>
   </li>
 
 </ul>
