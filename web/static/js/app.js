@@ -1,3 +1,6 @@
+
+import "phoenix_html"
+
 import {Socket, LongPoller} from "phoenix";
 
 let socket = new Socket("/socket", {
