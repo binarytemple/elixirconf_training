@@ -19,7 +19,9 @@ defmodule Docs.DocumentController do
     |> render("index.html", documents: documents)
   end
   def index(conn, _params) do
-    documents = Repo.all(from d in Document, where: d.is_deleted == false)
+    documents = Repo.all(from d in Document,
+      where: d.is_deleted == false,
+      order_by: [desc: d.inserted_at])
     render(conn, "index.html", documents: documents)
   end
 
