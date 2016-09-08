@@ -5,13 +5,15 @@ defmodule Docs.Document do
     field :body, :string
     field :title, :string
     field :author, :string
+    field :is_deleted, :boolean
+
     has_many :messages, Docs.Message
 
     timestamps
   end
 
   @required_fields ~w(body title)
-  @optional_fields ~w(author)
+  @optional_fields ~w(author is_deleted)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

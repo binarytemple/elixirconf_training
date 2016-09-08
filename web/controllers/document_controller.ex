@@ -19,7 +19,7 @@ defmodule Docs.DocumentController do
     |> render("index.html", documents: documents)
   end
   def index(conn, _params) do
-    documents = Repo.all(Document)
+    documents = Repo.all(from d in Document, where: d.is_deleted == false)
     render(conn, "index.html", documents: documents)
   end
 
@@ -67,14 +67,16 @@ defmodule Docs.DocumentController do
   end
 
   def delete(conn, %{"id" => id}) do
-    document = Repo.get!(Document, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(document)
-
-    conn
-    |> put_flash(:info, "Document deleted successfully.")
-    |> redirect(to: document_path(conn, :index))
+    case Repo.update(Document.changeset(Docs.Repo.get(Document,id),%{is_deleted: true} ) )
+      do
+      {:ok, document} ->
+        conn
+        |> put_flash(:info, "Document deleted successfully.")
+        |> redirect(to: document_path(conn, :index))
+      {:error, changeset} ->
+        conn
+        |> put_flash(:info, "Document failed deletion.")
+        |> redirect(to: document_path(conn, :index))
+    end
   end
 end
