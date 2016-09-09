@@ -51,7 +51,8 @@ defmodule Docs.Mixfile do
      {:mochijson2minimal, github: "binarytemple/mochijson2-minimal", app: false},
      {:sweet_xml, "~> 0.6.1"}, 
      {:html_sanitize , git: "git@github.com:binarytemple/phoenix_html_sanitizer.git", app: false, tag: "v1.0.2"},
-     {:calendar, "~> 0.14.2"}
+     {:calendar, "~> 0.16.1"},
+     {:calecto, "~> 0.16.0"}
      ]
   end
 
