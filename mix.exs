@@ -18,8 +18,18 @@ defmodule Docs.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Docs, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+     applications: [
+      :phoenix,
+      :phoenix_pubsub,
+      :phoenix_html,
+      :cowboy,
+      :logger,
+      :gettext,
+      :phoenix_ecto,
+      :postgrex,
+      :tzdata,
+      :calendar
+    ]]
   end
 
   # Specifies which paths to compile per environment
@@ -40,7 +50,8 @@ defmodule Docs.Mixfile do
      {:cowboy, "~> 1.0"},
      {:mochijson2minimal, github: "binarytemple/mochijson2-minimal", app: false},
      {:sweet_xml, "~> 0.6.1"}, 
-     {:html_sanitize , git: "git@github.com:binarytemple/phoenix_html_sanitizer.git", app: false, tag: "v1.0.2"}
+     {:html_sanitize , git: "git@github.com:binarytemple/phoenix_html_sanitizer.git", app: false, tag: "v1.0.2"},
+     {:calendar, "~> 0.14.2"}
      ]
   end
 
