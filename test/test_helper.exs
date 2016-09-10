@@ -2,5 +2,4 @@ ExUnit.start
 
 Mix.Task.run "ecto.create", ["--quiet"]
 Mix.Task.run "ecto.migrate", ["--quiet"]
-Ecto.Adapters.SQL.begin_test_transaction(Docs.Repo)
-
+Ecto.Adapters.SQL.Sandbox.mode(Docs.Repo, :manual)

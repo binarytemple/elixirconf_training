@@ -25,13 +25,11 @@ defmodule Docs.MessageController do
       |> Ecto.Model.build(:messages)
       |> Message.changeset(message_params)
 
-
     case Repo.insert(changeset) do
       {:ok, msg} ->
-        Doc.Endpoint.broadcast("documents:#{doc.id}", "new_message", %{
+        Docs.Endpoint.broadcast("documents:#{doc.id}", "new_message", %{
           id: msg.id, body: msg.body
         })
-
         conn
         |> put_flash(:info, "Message created successfully.")
         |> redirect(to: document_message_path(conn, :index, conn.assigns.document))
@@ -67,16 +65,13 @@ defmodule Docs.MessageController do
 
   def delete(conn, %{"id" => id}) do
     message = Repo.get!(Message, id)
-
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
     Repo.delete!(message)
-
     conn
     |> put_flash(:info, "Message deleted successfully.")
     |> redirect(to: document_message_path(conn, :index, conn.assigns.document))
   end
-
 
   defp find_document(conn, _) do
     assign(conn, :document, Repo.get!(Docs.Document, conn.params["document_id"]))

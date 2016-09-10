@@ -1,0 +1,6 @@
+<h2>New booking</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: booking_path(@conn, :create) %>
+
+<%= link "Back", to: booking_path(@conn, :index) %>

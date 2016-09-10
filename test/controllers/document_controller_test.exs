@@ -6,7 +6,7 @@ defmodule Docs.DocumentControllerTest do
   @invalid_attrs %{}
 
   setup do
-    conn = conn()
+    conn = build_conn()
     {:ok, conn: conn}
   end
 
@@ -62,10 +62,11 @@ defmodule Docs.DocumentControllerTest do
     assert html_response(conn, 200) =~ "Edit document"
   end
 
-  test "deletes chosen resource", %{conn: conn} do
-    document = Repo.insert! %Document{}
+  test "marks chosen resource as deleted", %{conn: conn} do
+    document = Repo.insert! %Document{author: "author", body: "some body", title: "some title"}
     conn = delete conn, document_path(conn, :delete, document)
     assert redirected_to(conn) == document_path(conn, :index)
-    refute Repo.get(Document, document.id)
+    #refute Repo.get(Document, document.id)
+    assert match? %{is_deleted: true }, Repo.get(Document, document.id) 
   end
 end

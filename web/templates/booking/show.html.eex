@@ -1,0 +1,28 @@
+<h2>Show booking</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @booking.title %>
+  </li>
+
+  <li>
+    <strong>Body:</strong>
+    <%= @booking.body %>
+  </li>
+
+  <li>
+    <strong>Start:</strong>
+    <%= @booking.start %>
+  </li>
+
+  <li>
+    <strong>End:</strong>
+    <%= @booking.end %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: booking_path(@conn, :edit, @booking) %>
+<%= link "Back", to: booking_path(@conn, :index) %>
