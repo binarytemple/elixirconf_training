@@ -11,9 +11,6 @@ defmodule Docs.MessageControllerTest do
     document = Repo.insert! %Document{author: "author", body: "some body", title: "some title"}
     {:ok, conn: build_conn, document_id: document.id }
 
-    #on_exit fn ->
-    #  from(d in Document, where: d.id == document.id) |> Repo.delete_all
-    #end
   end
 
   test "lists all entries on index", %{conn: conn, document_id: document_id} do
@@ -32,10 +29,10 @@ defmodule Docs.MessageControllerTest do
     assert Repo.get_by(Message, @valid_attrs)
   end
 
-  #test "does not create resource and renders errors when data is invalid", %{conn: conn, document_id: document_id} do
-  #  conn = post conn, document_message_path(conn, :create, document_id), message: @invalid_attrs
-  #  assert html_response(conn, 200) =~ "New message"
-  #end
+  test "does not create resource and renders errors when data is invalid", %{conn: conn, document_id: document_id} do
+    conn = post conn, document_message_path(conn, :create, document_id), message: @invalid_attrs
+    assert html_response(conn, 200) =~ "New message"
+  end
 
   test "shows chosen resource", %{conn: conn, document_id: document_id} do
     message = Repo.insert! %Message{document_id: document_id}
@@ -55,18 +52,18 @@ defmodule Docs.MessageControllerTest do
     assert html_response(conn, 200) =~ "Edit message"
   end
 
-  #test "updates chosen resource and redirects when data is valid", %{conn: conn, document_id: document_id} do
-  #  message = Repo.insert! %Message{}
-  #  conn = put conn, document_message_path(conn, :update, document_id, message), message: @valid_attrs
-  #  assert redirected_to(conn) == document_message_path(conn, :show, message)
-  #  assert Repo.get_by(Message, @valid_attrs)
-  #end
+  test "updates chosen resource and redirects when data is valid", %{conn: conn, document_id: document_id} do
+    message = Repo.insert! %Message{}
+    conn = put conn, document_message_path(conn, :update, document_id, message), message: @valid_attrs
+    assert redirected_to(conn) == document_message_path(conn, :show, document_id, message)
+    assert Repo.get_by(Message, @valid_attrs)
+  end
 
-  #test "does not update chosen resource and renders errors when data is invalid", %{conn: conn,document_id: document_id} do
-  #  message = Repo.insert! %Message{}
-  #  conn = put conn, document_message_path(conn, :update, document_id, message), message: @invalid_attrs
-  #  assert html_response(conn, 200) =~ "Edit message"
-  #end
+  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn,document_id: document_id} do
+    message = Repo.insert! %Message{}
+    conn = put conn, document_message_path(conn, :update, document_id, message), message: @invalid_attrs
+    assert html_response(conn, 200) =~ "Edit message"
+  end
 
   test "deletes chosen resource", %{conn: conn,document_id: document_id} do
     message = Repo.insert! %Message{document_id: document_id}
