@@ -22,7 +22,7 @@ defmodule Docs.MessageController do
     doc = conn.assigns.document
     changeset =
       doc
-      |> Ecto.Model.build(:messages)
+      |> Ecto.build_assoc(:messages)
       |> Message.changeset(message_params)
 
     case Repo.insert(changeset) do
