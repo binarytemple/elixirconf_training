@@ -45,7 +45,9 @@ export var App = {
 	};
 
 	
-	let docId  = $('#doc-form').data('id');
+	//let docId  = $('#doc-form').data('document-id');
+	let docId = $('#document-id')[0].value;
+
 	if(!docId) {
 	    console.log("can't find docId - bailing");
 	    return;

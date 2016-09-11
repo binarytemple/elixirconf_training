@@ -1,6 +1,8 @@
 defmodule Docs.DocumentChannel do
   use Docs.Web, :channel
-
+  alias Docs.{Document,Message}
+  require Logger
+  
   def join("documents:" <> doc_id, params, socket) do
     send(self, {:after_join, params})
     {:ok, assign(socket, :doc_id, doc_id)}
@@ -8,7 +10,11 @@ defmodule Docs.DocumentChannel do
   end
 
   def handle_info({:after_join, params}, socket) do
-    doc             = Repo.get(Document, socket.assigns.doc_id)
+   # Logger.error( "doc_id_assign #{ socket.assigns.doc_id ) } ")
+    doc             = Repo.get(Docs.Document, socket.assigns.doc_id)
+
+    #Logger.error( "that_doc #{ doc } ")
+    
     last_message_id = params["last_message_id"] || 0
     messages = Repo.all(
       from m in assoc(doc, :messages),
